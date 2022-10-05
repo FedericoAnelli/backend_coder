@@ -9,6 +9,7 @@ class Socket{
         io = new Server(httpServer);
         io.on('connection', (socket) => {
             console.log('a user connected', socket.id);
+            socket.emit('history', messages);
 
             socket.on('titleChange', (msg) => {
                 io.emit('titleChange', {id: socket.id, message: msg});
@@ -18,9 +19,9 @@ class Socket{
                 io.emit('priceChange', msg);
             });
 
-            socket.on('message', (userEmail, message) => {
-                messages.push({email: userEmail, message: message});
-                io.emit('message', {email: userEmail, message: message});
+            socket.on('message', (msg) => {
+                messages.push(msg);
+                io.emit('message', msg);
             });
 
             socket.on('disconnect', () => {
