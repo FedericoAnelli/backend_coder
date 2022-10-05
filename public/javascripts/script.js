@@ -21,6 +21,7 @@
     sendMessage.addEventListener('click', function(event){
         event.preventDefault();
         socket.emit('message', userEmail.value, userMessage.value);
+        userMessage.value = '';
     });
 
     socket.on('connect', () => {
@@ -37,6 +38,7 @@
 
     socket.on('message', (msg) => {
         messagesContainer.innerHTML += `<div class="alert alert-info" role="alert">${msg.email}: ${msg.message}</div>`
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
     )
 
