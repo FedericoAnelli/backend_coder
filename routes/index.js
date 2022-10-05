@@ -30,5 +30,11 @@ router.get('/', function(req, res, next) {
   res.render('index', {productos});
 });
 
+router.post('/', (req, res) => {
+  const producto = req.body;
+  producto.id = id++;
+  productos.push(producto);
+  res.redirect('/');
+});
 
 module.exports = router;
