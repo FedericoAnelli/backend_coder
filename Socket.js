@@ -1,6 +1,7 @@
 const { Server } = require('socket.io');
 
 let io;
+let messages = [];
 
 class Socket{
     static init(httpServer){
@@ -9,12 +10,16 @@ class Socket{
         io.on('connection', (socket) => {
             console.log('a user connected', socket.id);
 
-            socket.on('message', (msg) => {
-                io.emit('message', {id: socket.id, message: msg});
+            socket.on('titleChange', (msg) => {
+                io.emit('titleChange', {id: socket.id, message: msg});
             });
 
             socket.on('priceChange', (msg) => {
                 io.emit('priceChange', msg);
+            });
+
+            socket.on('message', (userEmail, message) => {
+                io.emit('message', {email: userEmail, message: message});
             });
 
             socket.on('disconnect', () => {
