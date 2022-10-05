@@ -13,7 +13,8 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "sweetalert2": "^11.4.37"
   },
   "devDependencies": {
     "dotenv": "^16.0.3"

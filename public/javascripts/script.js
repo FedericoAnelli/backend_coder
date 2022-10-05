@@ -37,9 +37,11 @@
     })
 
     socket.on('message', (msg) => {
-        messagesContainer.innerHTML += `<div class="alert alert-info" role="alert">${msg.email}: ${msg.message}</div>`
+        messagesContainer.innerHTML += `<div class="alert alert-info" role="alert"><strong>${msg.email}:</strong> ${msg.message}</div>`
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
     )
 
-})();
+}
+)(
+);

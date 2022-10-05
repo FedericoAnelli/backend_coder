@@ -19,6 +19,7 @@ class Socket{
             });
 
             socket.on('message', (userEmail, message) => {
+                messages.push({email: userEmail, message: message});
                 io.emit('message', {email: userEmail, message: message});
             });
 
@@ -26,6 +27,10 @@ class Socket{
                 console.log('user disconnected');
             });
         });
+    }
+
+    static getMessages(){
+        return messages;
     }
 }
 
