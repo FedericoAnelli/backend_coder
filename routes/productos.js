@@ -1,5 +1,7 @@
+
 var express = require('express');
 var router = express.Router();
+const fetch = require('node-fetch');
 
 const date = new Date();
 const year = date.getFullYear();
@@ -10,11 +12,10 @@ const minutes = date.getMinutes();
 const seconds = date.getSeconds();
 
 const productos = [
-
     {
         id: 1,
-        timestamp: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
         title: 'Escuadra',
+        timestamp: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
         description: 'Escuadra de 30 cm',
         code: '123456',
         price: 123.45,
@@ -23,8 +24,8 @@ const productos = [
     },
     {
         id: 2,
-        timestamp: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
         title: 'Calculadora',
+        timestamp: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
         description: 'Calculadora científica',
         code: '234567',
         price: 234.56,
@@ -33,15 +34,23 @@ const productos = [
     },
     {
         id: 3,
-        timestamp: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
         title: 'Globo Terráqueo',
-        description: 'Globo terráqueo de 30 cm',
+        timestamp: `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`,
+        description: 'Globo terráqueo',
         code: '345678',
         price: 345.67,
-        stock: 10,
+        stock: 23,
         thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'
     }
 ];
+/*
+fetch("http://localhost:3000/resources/productos.json").then(res => res.json()).then(data => {
+    data.forEach(producto => {
+        productos.push(producto);
+    });
+});
+*/
+
 
 let id = 4;
 let selectedProducts = [];
