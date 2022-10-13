@@ -46,14 +46,16 @@ router.post('/' , (req, res) => {
     const producto = req.body;
     producto.id = id++;
     carrito.push(producto);
-    res.render("productos", {carrito});
+    selectedProducts = carrito;
+    res.render("productos", {selectedProducts});
 });
 
 router.delete('/:id', (req, res) => {
     const producto = carrito.find(p => p.id == req.params.id);
     const index = carrito.indexOf(producto);
     carrito.splice(index, 1);
-    res.render("productos", {carrito});
+    selectedProducts = carrito;
+    res.render("productos", {selectedProducts});
 });
 
 router.get('/:id/carrito' , (req, res) => {
@@ -68,7 +70,8 @@ router.post('/:id/carrito' , (req, res) => {
     producto.title = req.body.title;
     producto.price = req.body.price;
     producto.thumbnail = req.body.thumbnail;
-    res.render("productos", {carrito});
+    selectedProducts = carrito;
+    res.render("productos", {selectedProducts});
 });
 
 router.delete('/:id/carrito/:id_producto' , (req, res) => {
