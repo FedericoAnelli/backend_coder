@@ -3,7 +3,7 @@ var express = require('express');
 const createHttpError = require('http-errors');
 var router = express.Router();
 const fetch = require('node-fetch');
-const isAdmin = false;
+const isAdmin = true;
 
 const date = new Date();
 const year = date.getFullYear();
