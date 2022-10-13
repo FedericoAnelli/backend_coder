@@ -1,7 +1,9 @@
 
 var express = require('express');
+const createHttpError = require('http-errors');
 var router = express.Router();
 const fetch = require('node-fetch');
+const isAdmin = false;
 
 const date = new Date();
 const year = date.getFullYear();
@@ -69,25 +71,40 @@ router.get('/:id', (req, res) => {
 );
 
 router.post('/', (req, res) => {
-    const producto = req.body;
-    producto.id = id++;
-    productos.push(producto);
-    res.redirect('/productos');
+    if (isAdmin) {
+        const producto = req.body;
+        producto.id = id++;
+        productos.push(producto);
+        res.render("productos", {selectedProducts});
+    }
+    else {
+        res.status(401).send("No autorizado");
+    }
 });
 
 router.put('/:id', (req, res) => {
+    if (isAdmin) {
     const producto = productos.find(p => p.id == req.params.id);
     producto.title = req.body.title;
     producto.price = req.body.price;
     producto.thumbnail = req.body.thumbnail;
     res.redirect('/productos');
+    }
+    else {
+        res.status(401).send("No autorizado");
+    }
 });
 
 router.delete('/:id', (req, res) => {
+    if (isAdmin) {
     const producto = productos.find(p => p.id == req.params.id);
     const index = productos.indexOf(producto);
     productos.splice(index, 1);
     res.redirect('/productos');
+    }
+    else {
+        res.status(401).send("No autorizado");
+    }
 });
 
 module.exports = router;
