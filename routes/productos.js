@@ -29,10 +29,31 @@ router.get('/', (__, res) => {
     res.render("productos", {productos});
 });
 
+router.get('/:id', (req, res) => {
+    const producto = productos.find(p => p.id == req.params.id);
+    res.render("productos", {producto});
+    }
+);
+
 router.post('/', (req, res) => {
     const producto = req.body;
     producto.id = id++;
     productos.push(producto);
+    res.redirect('/productos');
+});
+
+router.put('/:id', (req, res) => {
+    const producto = productos.find(p => p.id == req.params.id);
+    producto.title = req.body.title;
+    producto.price = req.body.price;
+    producto.thumbnail = req.body.thumbnail;
+    res.redirect('/productos');
+});
+
+router.delete('/:id', (req, res) => {
+    const producto = productos.find(p => p.id == req.params.id);
+    const index = productos.indexOf(producto);
+    productos.splice(index, 1);
     res.redirect('/productos');
 });
 
