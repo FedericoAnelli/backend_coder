@@ -72,10 +72,12 @@ router.post('/:id/carrito' , (req, res) => {
 });
 
 router.delete('/:id/carrito/:id_producto' , (req, res) => {
-    const producto = carrito.find(p => p.id == req.params.id);
-    const index = carrito.indexOf(producto);
-    carrito.splice(index, 1);
-    res.render("productos", {carrito});
+    const carritoSeleccionado = carrito.find(p => p.id == req.params.id);
+    const producto = carritoSeleccionado.productos.find(p => p.id == req.params.id_producto);
+    const index = carritoSeleccionado.productos.indexOf(producto);
+    carritoSeleccionado.productos.splice(index, 1);
+    selectedProducts = carritoSeleccionado.productos;
+    res.render("productos", {selectedProducts});
 });
 
 
