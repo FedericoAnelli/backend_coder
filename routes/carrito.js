@@ -46,20 +46,21 @@ router.post('/' , (req, res) => {
     const producto = req.body;
     producto.id = id++;
     carrito.push(producto);
-    res.render("carrito", {carrito});
+    res.render("productos", {carrito});
 });
 
 router.delete('/:id', (req, res) => {
     const producto = carrito.find(p => p.id == req.params.id);
     const index = carrito.indexOf(producto);
     carrito.splice(index, 1);
-    res.render("carrito", {carrito});
+    res.render("productos", {carrito});
 });
 
 router.get('/:id/carrito' , (req, res) => {
-    const producto = carrito.find(p => p.id == req.params.id);
-    selectedProducts = [producto];
-    res.render("carrito", {selectedProducts});
+    const carritoSeleccionado = carrito.find(p => p.id == req.params.id);
+    console.log(carritoSeleccionado.productos);
+    selectedProducts = carritoSeleccionado.productos;
+    res.render("productos", {selectedProducts});
 });
 
 router.post('/:id/carrito' , (req, res) => {
@@ -67,14 +68,14 @@ router.post('/:id/carrito' , (req, res) => {
     producto.title = req.body.title;
     producto.price = req.body.price;
     producto.thumbnail = req.body.thumbnail;
-    res.render("carrito", {carrito});
+    res.render("productos", {carrito});
 });
 
 router.delete('/:id/carrito/:id_producto' , (req, res) => {
     const producto = carrito.find(p => p.id == req.params.id);
     const index = carrito.indexOf(producto);
     carrito.splice(index, 1);
-    res.render("carrito", {carrito});
+    res.render("productos", {carrito});
 });
 
 
