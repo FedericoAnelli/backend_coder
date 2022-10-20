@@ -2,8 +2,12 @@
 var express = require('express');
 const createHttpError = require('http-errors');
 var router = express.Router();
-const fetch = require('node-fetch');
 const isAdmin = true;
+const DB = require('../utils/db');
+const db = new DB();
+if (!db.tableExists('productos')) {
+    db.createTable('productos');
+}
 
 const date = new Date();
 const year = date.getFullYear();
@@ -45,21 +49,19 @@ const productos = [
         thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'
     }
 ];
-/*
-fetch("http://localhost:3000/resources/productos.json").then(res => res.json()).then(data => {
-    data.forEach(producto => {
-        productos.push(producto);
-    });
-});
-*/
 
 
 let id = 4;
 let selectedProducts = [];
 
 router.get('/', (__, res) => {
-    selectedProducts = productos;
-    res.render("productos", {selectedProducts});
+    try{
+        selectedProducts = db.getAll('productos');
+        res.render("productos", {selectedProducts});
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
 });
 
 router.get('/:id', (req, res) => {
@@ -74,8 +76,13 @@ router.post('/', (req, res) => {
     if (isAdmin) {
         const producto = req.body;
         producto.id = id++;
-        productos.push(producto);
+        try{
+        db.update('productos', producto.id, producto);
+        selectedProducts = db.getAll('productos');
         res.render("productos", {selectedProducts});
+        } catch (err) {
+            console.log(err);
+        }
     }
     else {
         res.status(401).send("No autorizado");
