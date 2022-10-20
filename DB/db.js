@@ -45,7 +45,7 @@ var knex = require('knex')({
     async getAll(table) {
         let result = await this.knex(table).select('*')
         result = JSON.stringify(result, null, 2)
-        console.log(result)
+        //console.log(result)
         return result
 
     }

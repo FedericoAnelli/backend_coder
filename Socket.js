@@ -1,4 +1,9 @@
 const { Server } = require('socket.io');
+const DB = require('./DB/ecommerce');
+const db = new DB();
+if (!db.tableExists('messages')) {
+    db.createTable('messages');
+}
 
 let io;
 let messages = [];
@@ -9,6 +14,9 @@ class Socket{
         io = new Server(httpServer);
         io.on('connection', (socket) => {
             console.log('a user connected', socket.id);
+
+            messages = db.getAll('messages');
+
             socket.emit('history', messages);
 
             socket.on('titleChange', (msg) => {
@@ -20,7 +28,7 @@ class Socket{
             });
 
             socket.on('message', (msg) => {
-                messages.push(msg);
+                db.insert('messages', msg);
                 io.emit('message', msg);
             });
 

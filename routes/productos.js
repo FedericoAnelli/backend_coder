@@ -3,7 +3,7 @@ var express = require('express');
 const createHttpError = require('http-errors');
 var router = express.Router();
 const isAdmin = true;
-const DB = require('../utils/db');
+const DB = require('../DB/db');
 const db = new DB();
 if (!db.tableExists('productos')) {
     db.createTable('productos');
