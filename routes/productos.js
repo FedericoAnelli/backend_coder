@@ -7,11 +7,6 @@ const isAdmin = true;
 const DB = require('../DB/db');
 const db = new DB();
 
-const ProductosDAOMongoDB = require('../DAOs/productos/ProductosDAOMongoDB');
-const productosDAO = new ProductosDAOMongoDB();
-const CarritosDAOMongoDB = require('../DAOs/carritos/CarritosDAOMongoDB');
-const carritosDAO = new CarritosDAOMongoDB();
-
 if (!db.tableExists('productos')) {
     db.createTable('productos');
 }

@@ -10,3 +10,5 @@ class ProductosDAOMongoDB extends ContenedorArchivos {
             }));
     }
 }
+
+module.exports = ProductosDAOMongoDB;

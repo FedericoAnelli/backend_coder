@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var Socket = require('../Socket');
-var debug = require('debug')('express-hbs:server');
-var http = require('http');
+ var app = require('../app');
+ var Socket = require('../Socket');
+ var debug = require('debug')('express-hbs:server');
+ var http = require('http');
 
 /**
  * Get port from environment and store in Express.
