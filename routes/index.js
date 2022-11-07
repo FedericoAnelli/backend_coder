@@ -4,9 +4,10 @@ const isAdmin = true;
 const DB = require('../DB/db');
 const db = new DB();
 
-const ProductosDAOMongoDB = require('../DAOs/productos/ProductosDAOMongoDB');
+let ProductosDAOMongoDB = require('../DAOs/productos/ProductosDAOMongoDB');
 ProductosDAOMongoDB = new ProductosDAOMongoDB();
-const CarritosDAOMongoDB = require('../DAOs/carritos/CarritosDAOMongoDB');
+let CarritosDAOMongoDB = require('../DAOs/carritos/CarritosDAOMongoDB');
+CarritosDAOMongoDB = new CarritosDAOMongoDB();
 
 if (!db.tableExists('productos')) {
     db.createTable('productos');
