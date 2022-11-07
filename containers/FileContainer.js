@@ -4,7 +4,7 @@ const config = require('../config');
 class FileContainer {
 
     constructor (path) {
-        this.path = `/Users/fanelli/Desktop/Desarrollo/backend/express-hbs/`;
+        this.path = `${config.fileSystem.path}/${path}`;
     }
 
     async list (id) {
