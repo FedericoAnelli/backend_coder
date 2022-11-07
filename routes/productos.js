@@ -4,6 +4,9 @@ const createHttpError = require('http-errors');
 var router = express.Router();
 const isAdmin = true;
 
+let ProductosDAOMongoDB = require('../DAOs/productos/ProductosDAOMongoDB');
+ProductosDAOMongoDB = new ProductosDAOMongoDB();
+
 const DB = require('../DB/db');
 const db = new DB();
 
@@ -69,7 +72,6 @@ router.get('/', (__, res) => {
 router.get('/:id', (req, res) => {
     const producto = productos.find(p => p.id == req.params.id);
     selectedProducts = [producto];
-    console.log(selectedProducts);
     res.render("productos", {selectedProducts});
     }
 );
@@ -80,7 +82,8 @@ router.post('/', (req, res) => {
         producto.id = id++;
         try{
         db.update('productos', producto.id, producto);
-        selectedProducts = db.getAll('productos');
+        ProductosDAOMongoDB.insert(producto);
+        selectedProducts = ProductosDAOMongoDB.getAll();
         res.render("productos", {selectedProducts});
         } catch (err) {
             console.log(err);

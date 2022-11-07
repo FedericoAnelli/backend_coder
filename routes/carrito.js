@@ -60,7 +60,6 @@ router.delete('/:id', (req, res) => {
 
 router.get('/:id/carrito' , (req, res) => {
     const carritoSeleccionado = carrito.find(p => p.id == req.params.id);
-    console.log(carritoSeleccionado.productos);
     selectedProducts = carritoSeleccionado.productos;
     res.render("productos", {selectedProducts});
 });

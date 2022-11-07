@@ -4,8 +4,6 @@ const isAdmin = true;
 const DB = require('../DB/db');
 const db = new DB();
 
-let ProductosDAOMongoDB = require('../DAOs/productos/ProductosDAOMongoDB');
-ProductosDAOMongoDB = new ProductosDAOMongoDB();
 let CarritosDAOMongoDB = require('../DAOs/carritos/CarritosDAOMongoDB');
 CarritosDAOMongoDB = new CarritosDAOMongoDB();
 
