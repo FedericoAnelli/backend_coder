@@ -82,7 +82,7 @@ router.post('/', (req, res) => {
         producto.id = id++;
         try{
         db.update('productos', producto.id, producto);
-        ProductosDAOMongoDB.insert(producto);
+        ProductosDAOMongoDB.save(producto);
         selectedProducts = ProductosDAOMongoDB.getAll();
         res.render("productos", {selectedProducts});
         } catch (err) {
