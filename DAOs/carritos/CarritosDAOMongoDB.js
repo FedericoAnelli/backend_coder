@@ -8,6 +8,11 @@ class CarritosDAOMongoDB extends ContenedorArchivos {
             productos: { type: Array, required: true },
         }));
     }
+
+    async save(carrito = {productos: []}) {
+        return super.save(carrito);
+    }
+    
 }
 
 module.exports = CarritosDAOMongoDB;
