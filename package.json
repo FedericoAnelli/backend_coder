@@ -1,7 +1,7 @@
 {
-  "name": "entrega-12",
+  "name": "Backend coderhouse",
   "version": "1.0.0",
-  "description": "Entrega 12 para bootcamp de backend Coderhouse",
+  "description": "Backend coderhouse",
   "author": "Federico Anelli",
   "main": "index.js",
   "type": "module",
